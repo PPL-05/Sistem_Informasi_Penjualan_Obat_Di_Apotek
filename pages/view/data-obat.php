@@ -102,7 +102,7 @@ if (isset($_GET['status'])) {
         </button>
       </div>
       <div class="modal-body">
-      <form action="action/action?act=add-obat" style="font-size: 14px" method="POST">
+      <form id="kode" action="action/action?act=add-obat" style="font-size: 14px" method="POST" onsubmit="return validateForm()">
         <div class="row form-modal">
           <?php 
             $result   = $connect->query('SELECT max(kode) AS kode FROM tb_obat');
@@ -206,20 +206,19 @@ if (isset($_GET['status'])) {
 
 
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-        $('#edit_modal').on('show.bs.modal', function (e) {
-            var idx = $(e.relatedTarget).data('id');
-            //menggunakan fungsi ajax untuk pengambilan data
-            $.ajax({
-                type : 'post',
-                url : 'pages/modul/modal-e-obat.php',
-                data :  'idx='+ idx,
-                success : function(data){
-                $('.hasil-data').html(data);//menampilkan data ke dalam modal
-                }
-            });
-         });
-    });
-  </script>
+    function validateForm() {
+        var nama = document.getElementById("kode").elements["nama"].value;
+        var suplier = document.getElementById("kode").elements["suplier"].value;
+        var kategori = document.getElementById("kode").elements["kategori"].value;
+        var hbeli = document.getElementById("kode").elements["hbeli"].value;
+        var hjual = document.getElementById("kode").elements["hjual"].value;
+        var expire = document.getElementById("kode").elements["expire"].value;
+        var stok = document.getElementById("kode").elements["stok"].value;
+
+        if (nama == "" || suplier == "" || kategori == "" || hbeli == "" || hjual == "" || expire == "" || stok == "") {
+            alert("Semua kolom harus diisi");
+            return false;
+        }
+    }
+</script>
