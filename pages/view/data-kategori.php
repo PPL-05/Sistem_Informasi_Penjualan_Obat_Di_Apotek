@@ -113,18 +113,17 @@ if (isset($_GET['status'])) {
 <?php else: ?>
   
 
-                <form method="POST" action="action/action?act=add-kategori" style="font-size: 12px">
-                  <div class="form-group">
-                    <label for="exampleFormControlInput1">Kode kategori</label>
-                    <input type="text" class="form-control" value="<?= $execute->kode+1 ?>" readonly="" style="font-size: 12px">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleFormControlInput1">Nama kategori</label>
-                    <input type="text" class="form-control" placeholder="Masukkan Nama Kategori" style="font-size: 12px" name="nama">
-                  </div>
-                  <button class="btn btn-dark btn-sm" ><span class="fa fa-save"></span> Simpan</button>
-
-                </form>
+      <<form method="POST" action="action/action?act=add-satuan" style="font-size: 12px" onsubmit="return validateForm()">
+          <div class="form-group">
+              <label for="exampleFormControlInput1">Kode kategori</label>
+              <input type="text" class="form-control" value="<?= $execute->kode+1 ?>" readonly="" style="font-size: 12px">
+          </div>
+          <div class="form-group">
+              <label for="namaKategori">Nama kategori</label>
+              <input type="text" class="form-control" placeholder="Masukkan Nama Kategori" style="font-size: 12px" name="nama" id="namaKategori">
+          </div>
+          <button class="btn btn-dark btn-sm" ><span class="fa fa-save"></span> Simpan</button>
+      </form>
 
 <?php endif ?>
 
@@ -134,4 +133,15 @@ if (isset($_GET['status'])) {
           </div>
   </div>
 </div>
+<script>
+function validateForm() {
+    var namaKategori = document.getElementById("namaKategori").value;
 
+    if (namaKategori.trim() === "") {
+        alert("Nama kategori harus diisi");
+        return false;
+    }
+
+    return true;
+}
+</script>
