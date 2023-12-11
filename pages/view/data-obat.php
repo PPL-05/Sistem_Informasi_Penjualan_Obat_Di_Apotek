@@ -203,6 +203,23 @@ if (isset($_GET['status'])) {
   </div>
 </div>
 
+ <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('#edit_modal').on('show.bs.modal', function (e) {
+            var idx = $(e.relatedTarget).data('id');
+            //menggunakan fungsi ajax untuk pengambilan data
+            $.ajax({
+                type : 'post',
+                url : 'pages/modul/modal-e-obat.php',
+                data :  'idx='+ idx,
+                success : function(data){
+                $('.hasil-data').html(data);//menampilkan data ke dalam modal
+                }
+            });
+         });
+    });
+     </script>
 
 
 
