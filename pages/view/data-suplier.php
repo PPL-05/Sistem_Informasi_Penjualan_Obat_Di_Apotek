@@ -100,7 +100,7 @@ if (isset($_GET['status'])) {
         </button>
       </div>
       <div class="modal-body" >
-      <form method="POST" action="action/action?act=add-sup">
+      <form id="kode" action="action/action?act=add-sup" method="POST" onsubmit="return validateForm()">
         <div class="form-group">
           <?php 
             $result   = $connect->query('SELECT MAX(kode) AS kode FROM suplier');
@@ -163,25 +163,17 @@ if (isset($_GET['status'])) {
   </div>
 </div>
 
-
-
-
-
-
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function(){
-        $('#edit_modal').on('show.bs.modal', function (e) {
-            var idx = $(e.relatedTarget).data('id');
-            //menggunakan fungsi ajax untuk pengambilan data
-            $.ajax({
-                type : 'post',
-                url : 'pages/modul/modal-e-sup.php',
-                data :  'idx='+ idx,
-                success : function(data){
-                $('.hasil-data').html(data);//menampilkan data ke dalam modal
-                }
-            });
-         });
-    });
-  </script>
+    function validateForm() {
+        var nama = document.getElementById("kode").elements["nama"].value;
+        var lokasi = document.getElementById("kode").elements["lokasi"].value;
+        var telp = document.getElementById("kode").elements["telp"].value;
+        var email = document.getElementById("kode").elements["email"].value;
+        var alamat = document.getElementById("kode").elements["alamat"].value;
+
+        if (nama == "" || lokasi == "" || telp == "" || email == "" || alamat == "") {
+            alert("Semua kolom harus diisi");
+            return false;
+        }
+    }
+</script>
